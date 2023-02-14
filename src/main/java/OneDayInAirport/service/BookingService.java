@@ -1,6 +1,8 @@
 package OneDayInAirport.service;
 
 
+
+
 import OneDayInAirport.entity.BookingEntity;
 import OneDayInAirport.entity.FlightEntity;
 import OneDayInAirport.entity.PassengerEntity;
@@ -20,13 +22,12 @@ public class BookingService {
     private final BookingRepo repo;
     private final FlightRepo flightRepo;
     private final PassengerRepo passengerRepo;
-    private static final BookingEntity booking = new BookingEntity();
-    private static final PassengerEntity passenger = new PassengerEntity();
     public BookingService(BookingRepo repo, FlightRepo flightRepo, PassengerRepo passengerRepo) {
         this.repo = repo;
         this.flightRepo = flightRepo;
         this.passengerRepo = passengerRepo;
     }
+
 
     public List<FlightEntity> search(String toCity, String date, int free){
         return flightRepo.findAll().stream()
@@ -35,23 +36,17 @@ public class BookingService {
                         & f.getFreeSeats()>=free)
                 .collect(Collectors.toList());
     }
+    public void save(int flightNo, Long passId, int ticket){
 
 
-    public void save(int flightNo, String name, String surname, int ticket){
+        BookingEntity booking =
+                BookingEntity.builder()
+                .flight(flightRepo.getByFlightNo(flightNo))
+                .passenger(passengerRepo.getById(passId))
+                .build();
+        booking.setTicket(ticket);
+        booking.getFlight().setFreeSeats(booking.getFlight().getFreeSeats()-ticket);
 
-        for (FlightEntity f: flightRepo.findAll()){
-            if (f.getFlightNo()==flightNo & f.getFreeSeats()>=ticket){
-                passenger.setName(name); passenger.setSurname(surname);
-                passengerRepo.save(passenger);
-
-                booking.setPassenger(passenger);
-                booking.setFlight(f);
-                booking.setTicket(ticket);
-
-                f.setFreeSeats(f.getFreeSeats()-ticket);
-            }
-        }
         repo.save(booking);
-        passenger.setBooking(Collections.singletonList(booking));
     }
 }

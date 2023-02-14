@@ -23,9 +23,8 @@ public class BookingCtrl {
         return service.search(toCity, date, free);
     }
 
-    @PostMapping("/save/{flightNo}/{name}/{surname}/{ticket}")
-    public void save(@PathVariable int flightNo, @PathVariable String name,
-                     @PathVariable String surname, @PathVariable int ticket){
-        service.save(flightNo, name, surname, ticket);
+    @PostMapping("/s/{flightNo}/{passId}/{ticket}")
+    public void save(@PathVariable int flightNo, @PathVariable Long passId, @PathVariable int ticket){
+        service.save(flightNo, passId, ticket);
     }
 }

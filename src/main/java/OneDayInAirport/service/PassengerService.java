@@ -32,8 +32,7 @@ public class PassengerService {
         return bookingRepo.findAll().stream()
                 .filter(b -> Objects.equals(b.getPassenger().getId(), id)).collect(Collectors.toList());
     }
-    public List<PassengerEntity> get(Long id){
-        return repo.findById(id).stream()
-                .filter(b -> Objects.equals(b.getId(), id)).collect(Collectors.toList());
+    public PassengerEntity get(Long id){
+        return null;
     }
 }

@@ -24,8 +24,8 @@ public class PassengerCtrl {
 
         return service.myFlight(id);
     }
-@GetMapping("/myf/{id}")
-    public List<PassengerEntity> get(@PathVariable Long id){
+    @GetMapping("/myf/{id}")
+    public PassengerEntity get(@PathVariable Long id){
         return service.get(id);
     }
 }
