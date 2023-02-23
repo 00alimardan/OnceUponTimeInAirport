@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/flight")
 public class FlightCtrl {
+    //  http://localhost:8080/flight
     private final FlightService service;
 
     public FlightCtrl(FlightService service) {

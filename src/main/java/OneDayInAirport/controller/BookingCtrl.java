@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/booking")
 public class BookingCtrl {
+    //  http://localhost:8080/booking
     private final BookingService service;
 
     public BookingCtrl(BookingService service) {

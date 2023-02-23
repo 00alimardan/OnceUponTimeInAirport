@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/myFlight")
 public class PassengerCtrl {
+    //  http://localhost:8080/myFlight
     private final PassengerService service;
 
     public PassengerCtrl(PassengerService service) {
